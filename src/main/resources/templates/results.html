@@ -12,7 +12,10 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/"><i class="fa fa-coffee" aria-hidden="true" style="margin: 0 10px 0 0"></i>Toxic Coffee</a>
+        <a class="navbar-brand" href="/">
+            <i class="fa fa-coffee" aria-hidden="true" style="margin: 0 10px 0 0"></i>
+            Toxic Coffee
+        </a>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" th:value="${query}" name="query">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -22,34 +25,32 @@
     <div class="container">
         <hgroup class="mb20">
             <!-- <h1>Search Results</h1> -->
-            <h2 class="lead"  style="margin-top:10px">
+            <h2 class="lead" style="margin-top: 10px">
                 <strong th:text=${count}>1</strong>
-                possible results were found for the search for
+                possible results were found for
                 <strong th:text="${query}">FORREST GUMP</strong>
             </h2>
         </hgroup>
         <hr>
         <section class="col-xs-12 col-sm-6 col-md-12">
-            <article class="search-result row" th:each="result : ${results}" style="margin-bottom:20px">
+            <article class="search-result row" th:each="result : ${results}" style="margin-bottom: 20px">
                 <div class="col-xs-12 col-sm-12 col-md-3">
                     <img th:src="${result.pagemap.cse_thumbnail[0].src}" />
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
                     <h3>
-                        <a href="#" title="" th:text="${result.title}"></a>
+                        <a th:href="${result.link}" title="" th:text="${result.title}"></a>
                     </h3>
-                    <h5>
-                        <a th:href="'//' + ${result.htmlFormattedUrl}" title="" th:text="${result.htmlFormattedUrl}"></a>
-                    </h5>
+                    <h5 title="" th:text="${result.htmlFormattedUrl}"></h5>
                     <p th:text="${result.snippet}"></p>
-                    <h6>
+                    <!-- <h6>
                         <a href="#" title="">Actor: Tom Hanks, Gary Sinise, Robin Wright Penn</a>
                     </h6>
                     <h6>
                         <a href="#" title="">Director: Robert Zemeckis</a>
-                    </h6>
-                    <button type="button" class="btn btn-primary">IMDb</button>
+                    </h6> -->
+                    <a th:href="'https://www.youtube.com/watch?v=' + 'yMVrxs-d5Xk'" ><button type="button" class="btn btn-danger">Watch on YouTube</button></a>
                 </div>
                 <span class="clearfix borda"></span>
             </article>

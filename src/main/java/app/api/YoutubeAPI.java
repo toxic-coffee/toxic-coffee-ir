@@ -75,7 +75,7 @@ public class YoutubeAPI {
         try {
             HashMap<String, String> parameters = new HashMap<>();
             parameters.put("part", "snippet");
-            parameters.put("maxResults", "25");
+            parameters.put("maxResults", "1");
             parameters.put("q", query);
             parameters.put("type", "video");
             parameters.put("videoType", "movie");

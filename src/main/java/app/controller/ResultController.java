@@ -20,8 +20,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.services.customsearch.model.Result;
+import com.google.api.services.youtube.model.SearchListResponse;
 
 import app.api.CustomSearchAPI;
+import app.api.YoutubeAPI;
+import app.util.ResultListParser;
 
 /**
  * @author Isolachine
@@ -30,6 +33,17 @@ import app.api.CustomSearchAPI;
 @Controller
 @RestController
 public class ResultController {
+    @RequestMapping("youtube")
+    @ResponseBody
+    public SearchListResponse youtube(@RequestParam(value = "query", required = true, defaultValue = "") String query) {
+        try {
+            return new YoutubeAPI().search(query);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @RequestMapping("cse")
     @ResponseBody
     public List<Result> cse(@RequestParam(value = "query", required = true, defaultValue = "") String query) {
@@ -42,34 +56,31 @@ public class ResultController {
         }
         return null;
     }
-    
+
     @RequestMapping("results")
     public Model results(@RequestParam(value = "query", required = true, defaultValue = "") String query, Model model) throws JsonParseException, JsonMappingException, IOException {
-//        try {
-//            List<Result> results = new CustomSearchAPI().cse(query);
-//            model.addAttribute("results", results);
-//        } catch (GeneralSecurityException e) {
-//            model.addAttribute("results", new ArrayList<>());
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            model.addAttribute("results", new ArrayList<>());
-//            e.printStackTrace();
-//        }
-//        List<Integer> arr = new ArrayList<>();
-//        arr.add(1);
-//        arr.add(2);
-//        arr.add(3);
-//        arr.add(3);
-        
+        // try {
+        // List<Result> results = new CustomSearchAPI().cse(query);
+        // model.addAttribute("results", results);
+        // } catch (GeneralSecurityException e) {
+        // model.addAttribute("results", new ArrayList<>());
+        // e.printStackTrace();
+        // } catch (IOException e) {
+        // model.addAttribute("results", new ArrayList<>());
+        // e.printStackTrace();
+        // }
+
         ObjectMapper mapper = new ObjectMapper();
-        List<Result> results = mapper.readValue(new File("fg.json"), new TypeReference<List<Result>>(){});
-        System.out.println(results.get(0).getTitle());
+        List<Result> results = mapper.readValue(new File("fg.json"), new TypeReference<List<Result>>() {});
         
+        results = new ResultListParser().parseCSEList(results);
+        
+
         model.addAttribute("query", query);
 
         model.addAttribute("count", results.size());
         model.addAttribute("results", results);
         return model;
     }
-    
+
 }
