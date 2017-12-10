@@ -13,7 +13,7 @@
 <style>
 img {
 	object-fit: cover;
-	width: 175px;
+	width: 145px;
 	height: 200px;
 }
 </style>
@@ -41,12 +41,12 @@ img {
         </hgroup>
         <hr>
         <section>
-            <article class="search-result row" th:each="result : ${results}">
+            <article class="search-result row" th:each="result : ${results}" style = "border-bottom: 1px solid #DCD4D2;padding-top:10px">
                 <div class="col-xs-12 col-sm-12 col-md-2 text-center">
                     <img th:src="${result.pagemap.cse_thumbnail[0].src}" height="200" width="200">
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-6 excerpet text-left">
+                <div class="col-xs-12 col-sm-12 col-md-7 excerpet text-left">
                     <h2>
                         <a th:href="${result.link}" title="" th:text="${result.title}">FORREST GUMP</a>
                     </h2>
@@ -57,34 +57,17 @@ img {
                         <strong>Comedy · </strong>
                         JFK, LBJ, Vietnam, Watergate, and other history unfold through the perspective of an Alabama man with an IQ of 75. Stupid is as stupid does says Forrest Gump (played by Tom Hanks in an Oscar-winning performance) as he discusses his relative
                     </p>
-                    <!-- <h6><a title=""><strong >Rating: </strong >9.5</a></h6>     -->
-                    <!-- <br>    -->
-                    <!-- <input type="button" class="btn btn-secondary" style = "width: 100px;" value = "IMDb"> -->
-                    <a th:href="'https://www.youtube.com/watch?v=' + 'yMVrxs-d5Xk'" ><button type="button" class="btn btn-danger" style="width: 100px;" value="YouTube">YouTube</button></a>
+                    
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-4" style="border-left: 1px solid grey;">
-                    <p style="padding-left: 20px;">Rate from IMDb</p>
-                    <h1 style="padding-left: 20px;">9.8</h1>
-                    <br>
-                    <ul style="list-style-type: disc">
-                        <li>
-                            <strong>Best Rating: </strong>
-                            10
-                        </li>
-                        <li>
-                            <strong>Ratings from: </strong>
-                            1909 viewers
-                        </li>
-                        <li>
-                            <strong>Reviews from: </strong>
-                            1902 viewers
-                        </li>
-                    </ul>
-                    <!-- <input type="button" style = "padding-left: 20px;" class="btn btn-danger" value = "YouTube"> -->
-                </div>
-                <span class="clearfix borda"></span>
+                <div class="col-xs-12 col-sm-12 col-md-3 text-right">
+                    <p>Rate From IMDb</p>
+                    <h1>9.8</h1>
+                  	<p>From 1903 viewers</p>
+                    <a th:href="'https://www.youtube.com/watch?v=' + 'yMVrxs-d5Xk'" ><button type="button" class="btn btn-danger" style="width: 100px;" value="YouTube">YouTube</button></a>
+                </div>         
             </article>
+            
         </section>
     </div>
     <!-- Optional JavaScript -->
