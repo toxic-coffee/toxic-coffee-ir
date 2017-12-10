@@ -51,9 +51,10 @@ public class ResultListParser {
         		if (r.getLink().toLowerCase().equals(u))
         			isMain = true;
         		if (!u.equals("")) {
-        			if (!isMain)
-        				r = map.get(u).result;
-        			map.put(u, new WeightedResults(r, map.getOrDefault(u, new WeightedResults(null,0)).weight+results.size()-i));
+        			if (isMain || !map.containsKey(u))
+        				map.put(u, new WeightedResults(r, map.getOrDefault(u, new WeightedResults(null,0)).weight+results.size()-i));
+        			else
+        				map.put(u, new WeightedResults(map.get(u).result, map.getOrDefault(u, new WeightedResults(null,0)).weight+results.size()-i));
         		}
         		else continue;	
         }
