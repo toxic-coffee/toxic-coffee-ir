@@ -46,8 +46,13 @@ public class ResultListParser {
     		Map<String,WeightedResults> map = new HashMap<String,WeightedResults>();
         for (int i = 0; i < results.size() ; i++) {
         		Result r = results.get(i);
+        		boolean isMain = false;
         		String u = new Util().parseUrl(r.getLink().toLowerCase());
+        		if (r.getLink().toLowerCase().equals(u))
+        			isMain = true;
         		if (!u.equals("")) {
+        			if (!isMain)
+        				r = map.get(u).result;
         			map.put(u, new WeightedResults(r, map.getOrDefault(u, new WeightedResults(null,0)).weight+results.size()-i));
         		}
         		else continue;	
