@@ -65,7 +65,9 @@ public class ResultController {
         List<Result> results = mapper.readValue(new File("fg.json"), new TypeReference<List<Result>>(){});
         System.out.println(results.get(0).getTitle());
         
-        
+        model.addAttribute("query", query);
+
+        model.addAttribute("count", results.size());
         model.addAttribute("results", results);
         return model;
     }
