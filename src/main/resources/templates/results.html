@@ -16,13 +16,20 @@ img {
 	width: 145px;
 	height: 200px;
 }
+#containter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+    justify-content: center;
+}
+#content {}
 </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">
-            <i class="fa fa-coffee" aria-hidden="true" style="margin: 0 10px 0 0"></i>
-            Toxic Coffee
+        <a class="navbar-brand text-center" href="/">
+            <i class="fa fa-video-camera text-center" aria-hidden="true" style="margin: 0 5px 0 0"></i>
+            
         </a>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width: 400px;">
@@ -30,7 +37,7 @@ img {
         </form>
     </nav>
 
-    <div class="container" style="padding-left: 30px; padding-right: 30px;">
+    <div class="container" style="padding-left: 20px; padding-right: 20px;">
         <hgroup>
             <br>
             <p>
@@ -41,30 +48,28 @@ img {
         </hgroup>
         <hr>
         <section>
-            <article class="search-result row" th:each="result : ${results}" style = "border-bottom: 1px solid #DCD4D2;padding-top:10px">
+            <article class="search-result row" th:each="result : ${results}" style = "border-bottom: 1px solid #DCD4D2; padding-top:10px; padding-bottom:10px">
                 <div class="col-xs-12 col-sm-12 col-md-2 text-center">
                     <img th:src="${result.pagemap.cse_thumbnail[0].src}" height="200" width="200">
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-7 excerpet text-left">
                     <h2>
-                        <a th:href="${result.link}" title="" th:text="${result.title}">FORREST GUMP</a>
+                        <a th:href="${result.link}" title="" th:text="${result.title}"></a>
                     </h2>
                     <h6>
-                        <a title="" th:text="${result.htmlFormattedUrl}">www.imdb.com/title/tt2333</a>
+                        <a title="" th:text="${result.htmlFormattedUrl}"></a>
                     </h6>
-                    <p th:text="${result.snippet}">
-                        <strong>Comedy · </strong>
-                        JFK, LBJ, Vietnam, Watergate, and other history unfold through the perspective of an Alabama man with an IQ of 75. Stupid is as stupid does says Forrest Gump (played by Tom Hanks in an Oscar-winning performance) as he discusses his relative
-                    </p>
-                    
+                    <p th:text="${result.snippet}">               
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-3 text-right">
-                    <p>Rate From IMDb</p>
-                    <h1>9.8</h1>
+                <div id="containter" class="col-xs-12 col-sm-12 col-md-3 text-right">
+                    <div id="content">
+					<p>Rate From IMDb</p>
+					<h1>9.8</h1>
                   	<p>From 1903 viewers</p>
-                    <a th:href="'https://www.youtube.com/watch?v=' + 'yMVrxs-d5Xk'" ><button type="button" class="btn btn-danger" style="width: 100px;" value="YouTube">YouTube</button></a>
+                    <a th:href="'https://www.youtube.com/watch?v=' + 'yMVrxs-d5Xk'" ><button type="button" class="btn btn-danger center" style="width: 100px;" value="YouTube">YouTube</button></a>
+                    </div>
                 </div>         
             </article>
             
