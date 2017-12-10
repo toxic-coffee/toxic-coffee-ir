@@ -45,7 +45,7 @@ public class Util {
         if (idxId < 0)
         		return "";
         else
-        		return "http://www.imdb.com/" + url.substring(idxId, idxId + 16);
+        		return "www.imdb.com/" + url.substring(idxId, idxId + 16);
     }
 
     /**
