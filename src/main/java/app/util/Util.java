@@ -20,7 +20,17 @@ public class Util {
      */
     public String[] parseTitle(String title) {
         int idxYear = indexOf(Pattern.compile("\\(\\d{4}\\)"), title);
-        return new String[] { title.substring(0, idxYear), title.substring(idxYear + 1, idxYear + 5) };
+        if (idxYear < 0) {
+        		int idxTypeYear = indexOf(Pattern.compile("\\([a-zA-Z\\s]+\\d{4}.*\\)"), title);
+        		if (idxTypeYear < 0)
+        			return new String[]{"",""};
+        		else {
+        			idxYear = indexOf(Pattern.compile("\\d{4}"),title);
+        			return new String[] { title.substring(0, idxTypeYear), title.substring(idxYear, idxYear + 4) };
+        		}
+        }
+        else
+        		return new String[] { title.substring(0, idxYear), title.substring(idxYear + 1, idxYear + 5) };
     }
 
     /**
@@ -31,8 +41,11 @@ public class Util {
      * @return [clean IMDb url]
      */
     public String parseUrl(String url) {
-        int idxId = indexOf(Pattern.compile("\\/tt\\d{7}"), url);
-        return url.substring(0, idxId + 10);
+        int idxId = indexOf(Pattern.compile("title\\/tt\\d{7}"), url);
+        if (idxId < 0)
+        		return "";
+        else
+        		return url.substring(0, idxId + 15);
     }
 
     /**
