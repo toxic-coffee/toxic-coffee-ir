@@ -68,7 +68,7 @@ public class YoutubeAPI {
         return new YouTube.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential).setApplicationName(APPLICATION_NAME).build();
     }
 
-    public SearchListResponse search(String query) throws IOException {
+    public SearchListResponse search(String query, Boolean isMovie) throws IOException {
 
         YouTube youtube = getYouTubeService();
 
@@ -78,8 +78,10 @@ public class YoutubeAPI {
             parameters.put("maxResults", "1");
             parameters.put("q", query);
             parameters.put("type", "video");
-            parameters.put("videoType", "movie");
-            parameters.put("videoDuration", "long");
+            if (isMovie) {
+                parameters.put("videoType", "movie");
+                parameters.put("videoDuration", "long");
+            }
             
             
 

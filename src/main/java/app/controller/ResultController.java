@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.services.customsearch.model.Result;
 import com.google.api.services.youtube.model.SearchListResponse;
+import com.google.api.services.youtube.model.SearchResult;
 
 import app.api.CustomSearchAPI;
 import app.api.YoutubeAPI;
@@ -39,7 +40,7 @@ public class ResultController {
     @ResponseBody
     public SearchListResponse youtube(@RequestParam(value = "query", required = true, defaultValue = "") String query) {
         try {
-            return new YoutubeAPI().search(query);
+            return new YoutubeAPI().search(query, true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,8 +84,24 @@ public class ResultController {
 
         results = new ResultListParser().parseCSEList(results);
 
-        model.addAttribute("query", query);
+        YoutubeAPI youtubeAPI = new YoutubeAPI();
+        for (Result result : results) {
+            SearchListResponse response;
+            if (result.getPagemap().get("metatags") != null && result.getPagemap().get("metatags").get(0).get("og:type").equals("video.movie")) {
+                response = youtubeAPI.search(result.getTitle(), true);
+                List<SearchResult> youtubeResults = response.getItems();
+                if (youtubeResults.size() > 0) {
+                    SearchResult youtubeRes = youtubeResults.get(0);
+                    if (youtubeRes.getId().getVideoId() != null) {
+                        result.setHtmlFormattedUrl("https://www.youtube.com/watch?v=" + youtubeRes.getId().getVideoId());
+                    }
+                }
+            } else {
+                result.setHtmlFormattedUrl("https://www.youtube.com/results?search_query=" + result.getTitle());
+            }
+        }
 
+        model.addAttribute("query", query);
         model.addAttribute("count", results.size());
         model.addAttribute("results", results);
         return model;
