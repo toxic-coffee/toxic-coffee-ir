@@ -15,7 +15,7 @@ public class Movie {
 		title = "N/A";
 		year = 0;
 		url = "N/A";
-		youtubeUrl = "N/A";
+		youtubeUrl = "http://www.youtube.com/";
 		snippet = "N/A";
 		rating = 0;
 		voting = 0;

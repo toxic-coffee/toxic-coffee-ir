@@ -19,8 +19,8 @@ import com.google.api.services.customsearch.model.Search;
  *
  */
 public class CustomSearchAPI {
-    private static final String GOOGLE_API_KEY = "AIzaSyAg_84WojpTo_p8T64rcLQoI-ARWYRvbAc";
-    private static final String SEARCH_ENGINE_ID = "010650652691021911609:sbzherohkn4";
+    private static final String GOOGLE_API_KEY = "AIzaSyDOvl8vzFV2Uc9Te9etjPPvTonboWD5st0";
+    private static final String SEARCH_ENGINE_ID = "017294282214266038285:kb4mfhlkidg";
 
     public List<Result> cse(String query) throws GeneralSecurityException, IOException {
         Customsearch customsearch = new Customsearch.Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), null)
