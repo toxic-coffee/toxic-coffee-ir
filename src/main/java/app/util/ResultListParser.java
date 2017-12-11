@@ -49,8 +49,8 @@ public class ResultListParser {
         for (int i = 0; i < results.size(); i++) {
             Result r = results.get(i);
             boolean isMain = false;
-            String u = Util.parseUrl(r.getLink().toLowerCase());
-            if (r.getLink().toLowerCase().equals(u))
+            String u = Util.parseUrl(r.getFormattedUrl().toLowerCase());
+            if (r.getFormattedUrl().toLowerCase().equals(u))
                 isMain = true;
             if (!u.equals("")) {
                 if (isMain || !map.containsKey(u))
@@ -67,9 +67,9 @@ public class ResultListParser {
             wr.result.setLink(Util.parseLink(wr.result.getLink().toLowerCase()));
             wr.result.setHtmlFormattedUrl(Util.parseUrl(wr.result.getHtmlFormattedUrl().toLowerCase()));
             wr.result.setFormattedUrl(Util.parseUrl(wr.result.getFormattedUrl().toLowerCase()));
-            wr.result.setTitle(Util.parseTitle(wr.result.getTitle())[0] + " (" + Util.parseTitle(wr.result.getTitle())[1] + ")");
-            
-            System.out.println(wr.result.getHtmlFormattedUrl().toLowerCase());
+            String year = Util.parseTitle(wr.result.getTitle())[1].equals("") ? "" : " (" + Util.parseTitle(wr.result.getTitle())[1] + ")";
+            wr.result.setTitle(Util.parseTitle(wr.result.getTitle())[0] + year);
+
             newList.add(wr.result);
         }
         return newList;

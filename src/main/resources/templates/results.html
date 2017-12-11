@@ -16,23 +16,27 @@ img {
 	width: 145px;
 	height: 200px;
 }
+
 #containter {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end; 
-    justify-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: center;
 }
-#content {}
+
+#content {
+	
+}
 </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand text-center" href="/">
             <i class="fa fa-video-camera text-center" aria-hidden="true" style="margin: 0 5px 0 0"></i>
-            
+
         </a>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width: 400px;">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width: 400px;" th:value="${query}" name="query">
             <button class="btn btn-secondary bg-dark" type="submit">Search</button>
         </form>
     </nav>
@@ -48,7 +52,7 @@ img {
         </hgroup>
         <hr>
         <section>
-            <article class="search-result row" th:each="result : ${results}" style = "border-bottom: 1px solid #DCD4D2; padding-top:10px; padding-bottom:10px">
+            <article class="search-result row" th:each="result : ${results}" style="border-bottom: 1px solid #DCD4D2; padding-top: 10px; padding-bottom: 10px">
                 <div class="col-xs-12 col-sm-12 col-md-2 text-center">
                     <img th:src="${result.pagemap.cse_thumbnail[0].src}" height="200" width="200">
                 </div>
@@ -60,19 +64,20 @@ img {
                     <h6>
                         <a title="" th:text="${result.htmlFormattedUrl}"></a>
                     </h6>
-                    <p th:text="${result.snippet}">               
+                    <p th:text="${result.snippet}">
                 </div>
 
                 <div id="containter" class="col-xs-12 col-sm-12 col-md-3 text-right">
                     <div id="content">
-					<p>Rate From IMDb</p>
-					<h1>9.8</h1>
-                  	<p>From 1903 viewers</p>
-                    <a th:href="'https://www.youtube.com/watch?v=' + 'yMVrxs-d5Xk'" ><button type="button" class="btn btn-danger center" style="width: 100px;" value="YouTube">YouTube</button></a>
+                        <p>Rating From IMDb</p>
+                        <h1 th:text="${result.pagemap != null && result.pagemap['aggregaterating'] != null} ? ${result.pagemap.aggregaterating[0].ratingvalue} : 'N/A'">9.8</h1>
+                        <p th:text="${result.pagemap != null && result.pagemap['aggregaterating'] != null} ? 'From ' + ${result.pagemap.aggregaterating[0].ratingcount} + ' viewers':'&nbsp'">From 1903 viewers</p>
+                        <a th:href="'https://www.youtube.com/watch?v=' + 'yMVrxs-d5Xk'">
+                            <button type="button" class="btn btn-danger center" style="width: 100px;" value="YouTube">YouTube</button>
+                        </a>
                     </div>
-                </div>         
+                </div>
             </article>
-            
         </section>
     </div>
     <!-- Optional JavaScript -->

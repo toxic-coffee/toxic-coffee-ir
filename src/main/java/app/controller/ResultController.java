@@ -59,22 +59,23 @@ public class ResultController {
 
     @RequestMapping("results")
     public Model results(@RequestParam(value = "query", required = true, defaultValue = "") String query, Model model) throws JsonParseException, JsonMappingException, IOException {
+        // List<Result> results = new ArrayList<>();
         // try {
-        // List<Result> results = new CustomSearchAPI().cse(query);
+        // results = new CustomSearchAPI().cse(query);
         // model.addAttribute("results", results);
         // } catch (GeneralSecurityException e) {
-        // model.addAttribute("results", new ArrayList<>());
+        // model.addAttribute("results", results);
         // e.printStackTrace();
         // } catch (IOException e) {
-        // model.addAttribute("results", new ArrayList<>());
+        // model.addAttribute("results", results);
         // e.printStackTrace();
         // }
 
         ObjectMapper mapper = new ObjectMapper();
-        List<Result> results = mapper.readValue(new File("fg.json"), new TypeReference<List<Result>>() {});
-        
+        List<Result> results = mapper.readValue(new File("ff.json"), new TypeReference<List<Result>>() {
+        });
+
         results = new ResultListParser().parseCSEList(results);
-        
 
         model.addAttribute("query", query);
 
