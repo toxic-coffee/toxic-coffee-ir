@@ -6,6 +6,7 @@ package app.controller;
 import java.io.File;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import com.google.api.services.youtube.model.SearchListResponse;
 
 import app.api.CustomSearchAPI;
 import app.api.YoutubeAPI;
+import app.util.Const;
 import app.util.ResultListParser;
 
 /**
@@ -58,22 +60,26 @@ public class ResultController {
     }
 
     @RequestMapping("results")
-    public Model results(@RequestParam(value = "query", required = true, defaultValue = "") String query, Model model) throws JsonParseException, JsonMappingException, IOException {
-        // List<Result> results = new ArrayList<>();
-        // try {
-        // results = new CustomSearchAPI().cse(query);
-        // model.addAttribute("results", results);
-        // } catch (GeneralSecurityException e) {
-        // model.addAttribute("results", results);
-        // e.printStackTrace();
-        // } catch (IOException e) {
-        // model.addAttribute("results", results);
-        // e.printStackTrace();
-        // }
+    public Model results(@RequestParam(value = "query", required = true, defaultValue = "") String query, Model model) throws JsonParseException, JsonMappingException, IOException, GeneralSecurityException {
+        List<Result> results;
 
-        ObjectMapper mapper = new ObjectMapper();
-        List<Result> results = mapper.readValue(new File("ff.json"), new TypeReference<List<Result>>() {
-        });
+        if (Const.DEV_ENVIRONMENT) {
+            ObjectMapper mapper = new ObjectMapper();
+            results = mapper.readValue(new File(Const.TEST_JSON), new TypeReference<List<Result>>() {
+            });
+        } else {
+            results = new ArrayList<>();
+            try {
+                results = new CustomSearchAPI().cse(query);
+                model.addAttribute("results", results);
+            } catch (GeneralSecurityException e) {
+                model.addAttribute("results", results);
+                e.printStackTrace();
+            } catch (IOException e) {
+                model.addAttribute("results", results);
+                e.printStackTrace();
+            }
+        }
 
         results = new ResultListParser().parseCSEList(results);
 
