@@ -65,7 +65,7 @@ public class ResultController {
     public Model results(@RequestParam(value = "query", required = true, defaultValue = "") String query, Model model) throws JsonParseException, JsonMappingException, ImdbException, IOException {
         List<Result> results = new ArrayList<>();
         try {
-            results = new CustomSearchAPI().cse(query);
+            results = new CustomSearchAPI().cse(query + " movie");
             // model.addAttribute("results", results);
         } catch (GeneralSecurityException e) {
             // model.addAttribute("results", results);

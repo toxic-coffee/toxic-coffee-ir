@@ -55,7 +55,11 @@ public class ResultListParser {
                     m.url = "www.imdb.com/title/" + id;
                     m.snippet = r.getSnippet();
                     List<ImdbImage> photos = imdb.getTitlePhotos(id);
-                    if (photos.size() > 0)
+                    if (photos.size() > 50)
+                        m.posterUrl = photos.get(photos.size()-3).getImage().getUrl();
+                    else if (photos.size() > 1)
+                        m.posterUrl = photos.get(photos.size()-2).getImage().getUrl();
+                    else if (photos.size() > 0)
                         m.posterUrl = photos.get(photos.size()-1).getImage().getUrl();
                     else
                         m.posterUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Coffee_font_awesome.svg/512px-Coffee_font_awesome.svg.png";
