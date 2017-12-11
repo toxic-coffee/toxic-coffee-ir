@@ -58,11 +58,9 @@ img {
 
                 <div class="col-xs-12 col-sm-12 col-md-7 excerpet text-left">
                     <h2>
-                        <a th:href="${result.link}" title="" th:text="${result.title}"></a>
+                        <a th:href="${result.link}" title="" th:text="${result.title}" target="_blank"></a>
                     </h2>
-                    <h6>
-                        <a title="" th:text="${result.formattedUrl}" target="_blank"></a>
-                    </h6>
+                    <h6 title="" th:text="${result.formattedUrl}"></h6>
                     <p th:text="${result.snippet}">
                 </div>
 
