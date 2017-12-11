@@ -14,13 +14,21 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.0.0.M7</version>
-        <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.youtube.version>v3-rev188-1.23.0</project.youtube.version>
+        <project.google-cse.version>v1-rev57-1.23.0</project.google-cse.version>
+        <project.google-client.version>1.23.0</project.google-client.version>
+        <project.google-sqladmin.version>v1beta4-rev48-1.23.0</project.google-sqladmin.version>
+        <project.apache-commons-lang.version>3.7</project.apache-commons-lang.version>
+        <project.commons-codec.version>1.11</project.commons-codec.version>
+        <project.yaml.version>2.1</project.yaml.version>
+        <project.jackson.version>2.9.3</project.jackson.version>
     </properties>
 
     <dependencies>
@@ -38,37 +46,66 @@
         </dependency>
         <dependency>
             <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-youtube</artifactId>
+            <version>${project.youtube.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-customsearch</artifactId>
-            <version>v1-rev57-1.23.0</version>
+            <version>${project.google-cse.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client</artifactId>
-            <version>1.23.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.apis</groupId>
-            <artifactId>google-api-services-youtube</artifactId>
-            <version>v3-rev187-1.23.0</version>
+            <version>${project.google-client.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.oauth-client</groupId>
             <artifactId>google-oauth-client-jetty</artifactId>
-            <version>1.23.0</version>
+            <version>${project.google-client.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-sqladmin</artifactId>
-            <version>v1beta4-rev48-1.23.0</version>
+            <version>${project.google-sqladmin.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- Apache Commons -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${project.apache-commons-lang.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${project.commons-codec.version}</version>
+        </dependency>
+        <!--COMMON HTTP TOOLS-->
+        <dependency>
+            <groupId>org.yamj</groupId>
+            <artifactId>api-common</artifactId>
+            <version>${project.yaml.version}</version>
+        </dependency>
+        <!--JSON-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${project.jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${project.jackson.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+            <version>${project.jackson.version}</version>
         </dependency>
     </dependencies>
 

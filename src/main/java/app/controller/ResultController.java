@@ -25,6 +25,9 @@ import com.google.api.services.youtube.model.SearchListResponse;
 import app.api.CustomSearchAPI;
 import app.api.YoutubeAPI;
 import app.util.ResultListParser;
+import app.model.*;
+import com.omertron.imdbapi.*;
+import com.omertron.imdbapi.model.*;
 
 /**
  * @author Isolachine
@@ -58,7 +61,7 @@ public class ResultController {
     }
 
     @RequestMapping("results")
-    public Model results(@RequestParam(value = "query", required = true, defaultValue = "") String query, Model model) throws JsonParseException, JsonMappingException, IOException {
+    public Model results(@RequestParam(value = "query", required = true, defaultValue = "") String query, Model model) throws JsonParseException, JsonMappingException, ImdbException, IOException {
         // List<Result> results = new ArrayList<>();
         // try {
         // results = new CustomSearchAPI().cse(query);
@@ -75,12 +78,12 @@ public class ResultController {
         List<Result> results = mapper.readValue(new File("ff.json"), new TypeReference<List<Result>>() {
         });
 
-        results = new ResultListParser().parseCSEList(results);
+        // results = new ResultListParser().parseCSEList(results);
+        List<Movie> movies = new ResultListParser().parseCSEList(results);
 
         model.addAttribute("query", query);
-
-        model.addAttribute("count", results.size());
-        model.addAttribute("results", results);
+        model.addAttribute("count", movies.size());
+        model.addAttribute("results", movies);
         return model;
     }
 

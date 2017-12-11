@@ -54,15 +54,18 @@ img {
         <section>
             <article class="search-result row" th:each="result : ${results}" style="border-bottom: 1px solid #DCD4D2; padding-top: 10px; padding-bottom: 10px">
                 <div class="col-xs-12 col-sm-12 col-md-2 text-center">
-                    <img th:src="${result.pagemap.cse_thumbnail[0].src}" height="200" width="200">
+                    <!-- <img th:src="${result.pagemap.cse_thumbnail[0].src}" height="200" width="200"> -->
+                    <img th:src="${result.posterUrl}" height="200" width="200">
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-7 excerpet text-left">
                     <h2>
-                        <a th:href="${result.link}" title="" th:text="${result.title}"></a>
+                        <!-- <a th:href="${result.link}" title="" th:text="${result.title}"></a> -->
+                        <a th:href="'http://' + ${result.url}" title="" th:text="${result.title} + ' (' + ${result.year} + ')'"></a>
                     </h2>
                     <h6>
-                        <a title="" th:text="${result.htmlFormattedUrl}"></a>
+                        <!-- <a title="" th:text="${result.htmlFormattedUrl}"></a> -->
+                        <a title="" th:text="${result.url}"></a>
                     </h6>
                     <p th:text="${result.snippet}">
                 </div>
@@ -70,8 +73,10 @@ img {
                 <div id="containter" class="col-xs-12 col-sm-12 col-md-3 text-right">
                     <div id="content">
                         <p>Rating From IMDb</p>
-                        <h1 th:text="${result.pagemap != null && result.pagemap['aggregaterating'] != null} ? ${result.pagemap.aggregaterating[0].ratingvalue} : 'N/A'">9.8</h1>
-                        <p th:text="${result.pagemap != null && result.pagemap['aggregaterating'] != null} ? 'From ' + ${result.pagemap.aggregaterating[0].ratingcount} + ' viewers':'&nbsp'">From 1903 viewers</p>
+                        <!-- <h1 th:text="${result.pagemap != null && result.pagemap['aggregaterating'] != null} ? ${result.pagemap.aggregaterating[0].ratingvalue} : 'N/A'">9.8</h1>
+                        <p th:text="${result.pagemap != null && result.pagemap['aggregaterating'] != null} ? 'From ' + ${result.pagemap.aggregaterating[0].ratingcount} + ' viewers':'&nbsp'">From 1903 viewers</p> -->
+                        <h1 th:text="${result.rating != 0} ?  ${result.rating} : 'N/A'">9.8</h1>
+                        <p th:text="${result.voting != -1} ? 'From ' + ${result.voting} + ' viewers':'&nbsp'">From 1903 viewers</p>
                         <a th:href="'https://www.youtube.com/watch?v=' + 'yMVrxs-d5Xk'">
                             <button type="button" class="btn btn-danger center" style="width: 100px;" value="YouTube">YouTube</button>
                         </a>

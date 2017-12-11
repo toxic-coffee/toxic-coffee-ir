@@ -66,6 +66,14 @@ public class Util {
             return "http://www.imdb.com/" + link.substring(idxId, idxId + 16);
     }
 
+    public static String urlToId(String url) {
+        int idxId = indexOf(Pattern.compile("tt\\d{7}"), url);
+        if (idxId < 0)
+            return "";
+        else
+            return url.substring(idxId, idxId + 9);
+    }
+
     /**
      * [search for regular expression matching in given string, return the first index]
      * 
