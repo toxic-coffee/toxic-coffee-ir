@@ -62,18 +62,18 @@ img {
                         <a th:href="${result.link}" title="" th:text="${result.title}"></a>
                     </h2>
                     <h6>
-                        <a title="" th:text="${result.htmlFormattedUrl}"></a>
+                        <a title="" th:text="${result.formattedUrl}"></a>
                     </h6>
                     <p th:text="${result.snippet}">
                 </div>
 
                 <div id="containter" class="col-xs-12 col-sm-12 col-md-3 text-right">
                     <div id="content">
-                        <p>Rating From IMDb</p>
+                        <p>IMDb Rating</p>
                         <h1 th:text="${result.pagemap != null && result.pagemap['aggregaterating'] != null} ? ${result.pagemap.aggregaterating[0].ratingvalue} : 'N/A'">9.8</h1>
                         <p th:text="${result.pagemap != null && result.pagemap['aggregaterating'] != null} ? 'From ' + ${result.pagemap.aggregaterating[0].ratingcount} + ' viewers':'&nbsp'">From 1903 viewers</p>
-                        <a th:href="'https://www.youtube.com/watch?v=' + 'yMVrxs-d5Xk'">
-                            <button type="button" class="btn btn-danger center" style="width: 100px;" value="YouTube">YouTube</button>
+                        <a th:href="${result.htmlFormattedUrl}">
+                            <button type="button" class="btn btn-danger center" style="width: 100px;" value="YouTube" target="_blank">YouTube</button>
                         </a>
                     </div>
                 </div>
