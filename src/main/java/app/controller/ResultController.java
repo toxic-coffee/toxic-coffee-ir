@@ -36,6 +36,11 @@ import app.util.ResultListParser;
 @Controller
 @RestController
 public class ResultController {
+    @RequestMapping("index")
+    public Model index(Model model) {
+        return model;
+    }
+    
     @RequestMapping("youtube")
     @ResponseBody
     public SearchListResponse youtube(@RequestParam(value = "query", required = true, defaultValue = "") String query) {
